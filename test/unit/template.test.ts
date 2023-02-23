@@ -1,13 +1,14 @@
 import { expect, describe, jest, beforeEach, it } from "@jest/globals";
 
-import templates from "./../../src/templates/index";
-const { repositoryTemplate, serviceTemplate, factoryTemplate } = templates;
+import templates from "../../src/templates/index";
 
 import {
   repositoryTemplateMock,
   serviceTemplateMock,
   factoryTemplateMock,
 } from "./mocks/index";
+
+const { repositoryTemplate, serviceTemplate, factoryTemplate } = templates;
 
 describe("#CodeGenerator with 3 layers", () => {
   const componentName = "product";
@@ -37,19 +38,17 @@ describe("#CodeGenerator with 3 layers", () => {
     };
 
     const result = serviceTemplate(componentName, repositoryName);
-    console.log(result);
-    console.log(expected);
+
     expect(result).toStrictEqual(expected);
   });
   it("should generate a factory template", async () => {
     const expected = {
-      fileName: serviceName,
+      fileName: factoryName,
       template: factoryTemplateMock,
     };
 
-    const result = factoryTemplate(componentName, repositoryName);
-    console.log(result);
-    console.log(expected);
+    const result = factoryTemplate(componentName, repositoryName, serviceName);
+
     expect(result).toStrictEqual(expected);
   });
 });

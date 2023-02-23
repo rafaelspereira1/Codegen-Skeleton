@@ -1,15 +1,20 @@
 import Util from "../util";
-const componentNameAnchor = "$$componentName";
-const currentContextAnchor = "$$currentContext";
-const repositoryAnchor = "$$repositoryName";
-const template = `
-import ProductService from "../service/ProductService";
-import ProductRepository from "../service/ProductRepository";
 
-export default class ProductFactory {
-    static getInstance() {
-      const repository = new ProductRepository();
-      const service = new ProductService({ repository });
+const serviceNameAnchor = "$$serviceName";
+const repositoryNameAnchor = "$$repositoryName";
+const componentNameAnchor = "$$componentName";
+
+const serviceNameDepAnchor = "$$serviceNameDep";
+const repositoryNameDepAnchor = "$$repositoryNameDep";
+
+const template = `
+import $$serviceName from "../service/$$serviceNameDep;
+import $$repositoryName from "../service/$$repositoryNameDep";
+
+export default class $$componentNameFactory {
+    static getInstance() { 
+      const repository = new $$repositoryName();
+      const service = new $$serviceName({ repository });
       return service;
     }
   }`;
@@ -19,13 +24,20 @@ export default function factoryTemplate(
   repositoryName: string,
   serviceName: string
 ) {
-  const currentContext = `this.${repositoryName}`;
   const txtFile = template
     .replaceAll(componentNameAnchor, Util.upperCaseFirstLetter(componentName))
-    .replaceAll(currentContextAnchor, currentContext)
-    .replaceAll(repositoryAnchor, repositoryName);
+    .replaceAll(serviceNameDepAnchor, Util.lowerCaseFirstLetter(serviceName))
+    .replaceAll(
+      repositoryNameDepAnchor,
+      Util.lowerCaseFirstLetter(repositoryName)
+    )
+    .replaceAll(serviceNameAnchor, Util.upperCaseFirstLetter(serviceName))
+    .replaceAll(
+      repositoryNameAnchor,
+      Util.upperCaseFirstLetter(repositoryName)
+    );
   return {
-    fileName: `${componentName}Service`,
-    template,
+    fileName: `${componentName}Factory`,
+    template: txtFile,
   };
 }
