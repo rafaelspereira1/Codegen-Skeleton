@@ -1,4 +1,5 @@
 import Util from "../util";
+
 const componentNameAnchor = "$$componentName";
 
 const template = `
