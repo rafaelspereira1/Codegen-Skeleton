@@ -1,7 +1,7 @@
 import fsPromises from "fs/promises";
 import templates from "templates";
 import Util from "./util";
-import { ICreateFilesProps, IDependencies } from "./@types/createLayers.types";
+import { ICreateFilesProps, IDependencies, ITemplates } from "./@types/createLayers.types";
 
 const defaultDepedencies = (
   layer: keyof IDependencies,
@@ -30,7 +30,7 @@ export default async function createFiles({
   layers,
   componentName,
 }: ICreateFilesProps) {
-  const keys = Object.keys(templates);
+  const keys: string[] = Object.keys(templates);
 
   const PendingFilesToWrite: {
     fileNamePath: string;
@@ -44,12 +44,12 @@ export default async function createFiles({
     }
 
     // @ts-ignore
-    const template = templates[chosenTemplate];
+    const template: ITemplates[chosenTemplate] = templates[chosenTemplate];
 
     // exemple: /users/documents/username/codegen/src/factory
     const targetFolder = `${mainPath}/${defaultMainFolder}/${layer}`;
     // @ts-ignore
-    const depedencies = defaultDepedencies(layer, componentName);
+    const depedencies: string[] = defaultDepedencies(layer, componentName);
 
     const { fileName, template: txtFile } = template(
       componentName,
