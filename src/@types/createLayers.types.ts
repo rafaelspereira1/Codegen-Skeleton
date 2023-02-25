@@ -17,10 +17,10 @@ interface IDependencies {
   factory: string[];
 }
 interface ITemplates {
-  [key: string]: (componentName: string, repositoryName?: string, serviceName?: string) => Template
-  repositoryTemplate: (componentName: string) => Template
-  serviceTemplate: (componentName: string, repositoryName: string) => Template
-  factoryTemplate: (componentName: string, serviceName: string) => Template
+  [key: string]: (componentName: string, repositoryName?: string, serviceName?: string) => Template;
+  repositoryTemplate: (componentName: string) => Template;
+  serviceTemplate: (componentName: string, repositoryName: string) => Template;
+  factoryTemplate: (componentName: string, serviceName: string) => Template;
 }
 interface Template {
   fileName: string

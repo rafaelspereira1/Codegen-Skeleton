@@ -7,7 +7,8 @@
   "scripts": {
     "start": "npx ts-node src/index.ts",
     "test": "npx jest --config jest.config.ts --runInBand --no-cache",
-    "test:coverage": "npx jest --config jest.config.ts --coverage --runInBand --no-cache"
+    "test:coverage": "npx jest --config jest.config.ts --coverage --runInBand --no-cache",
+    "lint:fix": "eslint --ext js,ts src --fix"
   },
   "repository": "https://github.com/rafaelspereira1/Codegen-Skeleton.git",
   "author": "Rafael Pereira <rafaelspereira1@hotmail.com>",
