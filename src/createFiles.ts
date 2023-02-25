@@ -1,7 +1,8 @@
 import fsPromises from "fs/promises";
 import templates from "templates";
+import { ITemplates } from "./@types/createFiles.types";
 import Util from "./util";
-import { ICreateFilesProps, IDependencies, ITemplates } from "./@types/createLayers.types";
+import { ICreateFilesProps, IDependencies } from "./@types/createLayers.types";
 
 const defaultDepedencies = (
   layer: keyof IDependencies,
