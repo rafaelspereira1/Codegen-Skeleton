@@ -11,9 +11,8 @@ export default async function createLayersIfNotExists({
 
   const foldersToCreate = layers.filter((layer) => !fs.existsSync(layer));
 
-  const results = foldersToCreate.map(
-    (folder) => fsPromises.mkdir(`${defaultPath}/${folder}`),
-    { recursive: true }
+  const results = foldersToCreate.map((folder) =>
+    fsPromises.mkdir(`${defaultPath}/${folder}`, { recursive: true })
   );
 
   return Promise.all(results);
