@@ -1,5 +1,5 @@
 import templates from "templates";
-import { expect, describe, jest, beforeEach, it } from "@jest/globals";
+import { expect, describe, jest, it } from "@jest/globals";
 import createFiles from "createFiles";
 
 import fsPromises from "fs/promises";
@@ -15,11 +15,6 @@ describe("#Files - Folder Structure", () => {
 
   const repositoryLayer = `${config.componentName}Repository`;
   const serviceLayer = `${config.componentName}Service`;
-
-  beforeEach(() => {
-    jest.resetAllMocks();
-    jest.clearAllMocks();
-  });
 
   it("should not create a file structure if the template do not exist", async () => {
     const myConfig = {
