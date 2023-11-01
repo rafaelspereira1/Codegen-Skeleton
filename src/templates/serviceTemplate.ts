@@ -4,8 +4,16 @@ const componentNameAnchor = "$$componentName";
 const currentContextAnchor = "$$currentContext";
 const repositoryAnchor = "$$repositoryName";
 const template = `
+interface Repository {
+  create(data: string): Promise<any>;
+  read(query: string): Promise<any>;
+  update(id: number, data: string): Promise<any>;
+  delete(id: number): Promise<any>;
+}
 export default class $$componentNameService {
-  constructor({ repository: $$repositoryName }) {
+  private $$repositoryName: Repository;
+
+  constructor({ repository: $$repositoryName }: { repository: Repository }) {
     $$currentContext = $$repositoryName;
   }
 

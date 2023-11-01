@@ -54,8 +54,7 @@ describe("#Integration - Files - Files Structure", () => {
   });
 
   afterAll(async () => {
-    console.log(config.mainPath);
-    // await fsPromises.rm(config.mainPath, { recursive: true });
+    await fsPromises.rm(config.mainPath, { recursive: true });
   });
 
   beforeEach(() => {
@@ -92,38 +91,34 @@ describe("#Integration - Files - Files Structure", () => {
       layers: ["repository", "service"],
     };
 
-    try {
-      await createFiles(myConfig);
+    await createFiles(myConfig);
 
-      const [repositoryFile, serviceFile] = generateFilePath(myConfig);
+    const [repositoryFile, serviceFile] = generateFilePath(myConfig);
 
-      const { default: Repository } = await import(repositoryFile);
+    const { default: Repository } = await import(repositoryFile);
 
-      const { default: Service } = await import(serviceFile);
+    const { default: Service } = await import(serviceFile);
 
-      const repository = new Repository();
-      const service = new Service({ repository });
+    const repository = new Repository();
+    const service = new Service({ repository });
 
-      const allRepositoryMethods = getAllFunctionsFromInstance(repository);
+    const allRepositoryMethods = getAllFunctionsFromInstance(repository);
 
-      allRepositoryMethods.forEach((method) => {
-        if (typeof method === "symbol") {
-          // eslint-disable-next-line no-param-reassign
-          method = method.toString();
-        }
-        jest.spyOn(repository, method).mockResolvedValue(null);
-      });
+    allRepositoryMethods.forEach((method) => {
+      if (typeof method === "symbol") {
+        // eslint-disable-next-line no-param-reassign
+        method = method.toString();
+      }
+      jest.spyOn(repository, method).mockResolvedValue(null);
+    });
 
-      getAllFunctionsFromInstance(service).forEach((method) =>
-        service[method].call(service, [])
-      );
+    getAllFunctionsFromInstance(service).forEach((method) =>
+      service[method].call(service, [])
+    );
 
-      allRepositoryMethods.forEach((method) =>
-        expect(repository[method]).toHaveBeenCalled()
-      );
-    } catch (error) {
-      console.log(error);
-    }
+    allRepositoryMethods.forEach((method) =>
+      expect(repository[method]).toHaveBeenCalled()
+    );
   });
 
   // it("Factory instance should match layers", async () => {});

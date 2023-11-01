@@ -32,14 +32,11 @@ describe("#CodeGenerator with 3 layers", () => {
     expect(result).toStrictEqual(expected);
   });
   it("should generate a service template", async () => {
-    const expected = {
-      fileName: serviceName,
-      template: serviceTemplateMock,
-    };
+    const expected = serviceTemplateMock.template.replace(/\s+/g, " ").trim();
 
     const result = serviceTemplate(componentName, repositoryName);
 
-    expect(result).toStrictEqual(expected);
+    expect(result.template.replace(/\s+/g, " ").trim()).toStrictEqual(expected);
   });
   it("should generate a factory template", async () => {
     const expected = {

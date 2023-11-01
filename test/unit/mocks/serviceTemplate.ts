@@ -1,22 +1,34 @@
-export default `
-export default class ProductService {
-  constructor({ repository: productRepository }) {
-    this.productRepository = productRepository;
-  }
+export default {
+  fileName: "productService",
+  template: `
+    interface Repository {
+      create(data: string): Promise<any>;
+      read(query: string): Promise<any>;
+      update(id: number, data: string): Promise<any>;
+      delete(id: number): Promise<any>;
+    }
+    export default class ProductService {
+      private productRepository: Repository;
 
-  create(data: string) {
-    return this.productRepository.create(data);
-  }
+      constructor({ repository: productRepository }: { repository: Repository }) {
+        this.productRepository = productRepository;
+      }
 
-  read(query: string) {
-    return this.productRepository.read(query);
-  }
+      create(data: string) {
+        return this.productRepository.create(data);
+      }
 
-  update(id: number, data: string) {
-    return this.productRepository.update(id, data);
-  }
+      read(query: string) {
+        return this.productRepository.read(query);
+      }
 
-  delete(id: number) {
-    return this.productRepository.delete(id);
-  }
-}`;
+      update(id: number, data: string) {
+        return this.productRepository.update(id, data);
+      }
+
+      delete(id: number) {
+        return this.productRepository.delete(id);
+      }
+    }
+  `,
+};
