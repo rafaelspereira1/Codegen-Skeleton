@@ -8,11 +8,11 @@ const serviceNameDepAnchor = "$$serviceNameDep";
 const repositoryNameDepAnchor = "$$repositoryNameDep";
 
 const template = `
-import $$serviceName from "../service/$$serviceNameDep;
-import $$repositoryName from "../service/$$repositoryNameDep";
+import $$serviceName from "../service/$$serviceNameDep";
+import $$repositoryName from "../repository/$$repositoryNameDep";
 
 export default class $$componentNameFactory {
-    static getInstance() { 
+    static getInstance() {
       const repository = new $$repositoryName();
       const service = new $$serviceName({ repository });
       return service;

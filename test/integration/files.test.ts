@@ -121,5 +121,24 @@ describe("#Integration - Files - Files Structure", () => {
     );
   });
 
-  // it("Factory instance should match layers", async () => {});
+  it("Factory instance should match layers", async () => {
+    const myConfig = {
+      ...config,
+    };
+
+    await createFiles(myConfig);
+
+    const [factoryFile, repositoryFile, serviceFile] =
+      generateFilePath(myConfig);
+
+    const { default: Repository } = await import(repositoryFile);
+    const { default: Service } = await import(serviceFile);
+    const { default: Factory } = await import(factoryFile);
+
+    const expectedInstance = new Service({ repository: new Repository() });
+    const instance = Factory.getInstance();
+
+    expect(instance).toMatchObject(expectedInstance);
+    expect(instance).toBeInstanceOf(Service);
+  });
 });
