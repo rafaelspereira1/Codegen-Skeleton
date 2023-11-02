@@ -1,9 +1,9 @@
-#!/usr/bin/env node
+#!/usr/bin/env -S npx tsx
 
-import createFiles from "createFiles";
-import createLayersIfNotExists from "createLayers";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
+import createLayersIfNotExists from "./createLayers";
+import createFiles from "./createFiles";
 import { IArguments } from "./@types/index.types";
 
 const argv = yargs(hideBin(process.argv))
