@@ -1,5 +1,5 @@
 import fsPromises from "fs/promises";
-import templates from "templates";
+import templates from "templates/index";
 import Util from "./util";
 import { ICreateFilesProps, IDependencies } from "./@types/createLayers.types";
 
