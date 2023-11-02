@@ -43,17 +43,19 @@ const config = {
   mainPath: ".",
 };
 
-(async () => {
+async function main() {
   await createLayersIfNotExists(config);
-})();
 
-const pendingPromises = (componentName as string[]).map((domain: string) =>
-  createFiles({
-    ...config,
-    componentName: domain,
-  })
-);
+  const pendingPromises = (componentName as string[]).map((domain: string) =>
+    createFiles({
+      ...config,
+      componentName: domain,
+    })
+  );
 
-(async () => {
   await Promise.all(pendingPromises);
-})();
+}
+
+main().catch((error) => {
+  console.error(error);
+});

@@ -1,17 +1,16 @@
 {
   "name": "codegen-skeleton",
-  "version": "1.0.1",
-  "description": "",
-  "main": "index.js",
+  "version": "1.0.6",
+  "description": "Generate a skeleton of a project with Typescript",
   "bin": {
     "codegen-skeleton": "./src/index.ts"
   },
-  "type": "module",
   "scripts": {
-    "start": "NODE_ENV=dev tsx src/index.ts skeleton -c product -c category",
+    "start": "NODE_ENV=dev tsx ./src/index.ts skeleton -c product -c category",
     "test": "npx jest --config jest.config.ts --runInBand --no-cache",
     "test:coverage": "npx jest --config jest.config.ts --coverage --runInBand --no-cache"
   },
+  "type": "module",
   "repository": "https://github.com/rafaelspereira1/Codegen-Skeleton.git",
   "author": "Rafael Pereira <rafaelspereira1@hotmail.com>",
   "license": "MIT",
