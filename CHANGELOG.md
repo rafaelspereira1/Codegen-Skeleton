@@ -12,7 +12,7 @@
 ```
 
 - 1.1.0
-  - Add support for Windows
+  - Add support for Windows without using WSL
 
 ```
 
